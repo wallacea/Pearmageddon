@@ -1,0 +1,18 @@
+﻿@model IEnumerable<PearType>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a asp-action="New" asp-controller="PearType" class="btn btn-primary">Add New Pear Type</a>
+<div>
+    <h2>Pear Types</h2>
+    @foreach(var pear in Model)
+    {
+        <div>
+            <div>Pear Name: @pear.Name</div>
+            <div>Pear Color: @pear.Color</div>
+            <div><a asp-action="Edit" asp-controller="PearType" asp-route-id="@pear.ID">Edit Pear Type</a></div>
+        </div>
+    }
+</div>

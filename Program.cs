@@ -1,5 +1,12 @@
-var builder = WebApplication.CreateBuilder(args);
+using Pearmageddon.Repositories;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddResponseCaching();
+builder.Services.AddOutputCache();
+builder.Services.AddTransient<IPearTypeRepository, DBPearTypeRepository>();
+builder.Services.AddTransient<ICanningSessionRepository, InMemoryCanningSessionRepository>();
+builder.Configuration.AddJsonFile("PearTypes.json", optional:false, reloadOnChange: true);
+builder.Services.Configure<PearmageddonConfig>(builder.Configuration.GetSection("PearmageddonConfig"));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -17,11 +24,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseResponseCaching();
+app.UseOutputCache();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
+
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
