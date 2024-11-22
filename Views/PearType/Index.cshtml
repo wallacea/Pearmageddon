@@ -4,15 +4,17 @@
 *@
 @{
 }
-<a asp-action="New" asp-controller="PearType" class="btn btn-primary">Add New Pear Type</a>
+<a asp-action="New" asp-controller="PearType" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add New Pear Type</a>
 <div>
-    <h2>Pear Types</h2>
+    <h1>Pear Types</h1>
+    <div class="pearTypes">
     @foreach(var pear in Model)
     {
-        <div>
-            <div>Pear Name: @pear.Name</div>
-            <div>Pear Color: @pear.Color</div>
-            <div><a asp-action="Edit" asp-controller="PearType" asp-route-id="@pear.ID">Edit Pear Type</a></div>
+        <div class="row">
+            <h2>@pear.Name</h2>
+            <div>Color: @pear.Color</div>
+                <div><a asp-action="Edit" asp-controller="PearType" asp-route-id="@pear.ID" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i> Edit Pear Type</a></div>
         </div>
     }
+    </div>
 </div>

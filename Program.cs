@@ -1,6 +1,15 @@
 using Pearmageddon.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Pearmageddon.Data;
+using Pearmageddon.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("PearmageddonContextConnection") ?? throw new InvalidOperationException("Connection string 'PearmageddonContextConnection' not found.");
+
+builder.Services.AddDbContext<PearmageddonContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<PearmageddonUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<PearmageddonContext>();
 builder.Services.AddResponseCaching();
 builder.Services.AddOutputCache();
 builder.Services.AddTransient<IPearTypeRepository, DBPearTypeRepository>();
@@ -26,7 +35,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseResponseCaching();
 app.UseOutputCache();
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllers();
 
