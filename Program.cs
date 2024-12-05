@@ -13,7 +13,7 @@ builder.Services.AddDefaultIdentity<PearmageddonUser>(options => options.SignIn.
 builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
 builder.Services.AddOutputCache();
-builder.Services.AddTransient<IPearTypeRepository, FlatFilePearTypeRepository>();
+builder.Services.AddTransient<IPearTypeRepository, DBPearTypeRepository>();
 builder.Services.AddTransient<ICanningSessionRepository, InMemoryCanningSessionRepository>();
 builder.Configuration.AddJsonFile("PearTypes.json", optional:false, reloadOnChange: true);
 builder.Services.Configure<PearmageddonConfig>(builder.Configuration.GetSection("PearmageddonConfig"));
