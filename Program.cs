@@ -10,9 +10,10 @@ var connectionString = builder.Configuration.GetConnectionString("PearmageddonCo
 builder.Services.AddDbContext<PearmageddonContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<PearmageddonUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<PearmageddonContext>();
+builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
 builder.Services.AddOutputCache();
-builder.Services.AddTransient<IPearTypeRepository, DBPearTypeRepository>();
+builder.Services.AddTransient<IPearTypeRepository, FlatFilePearTypeRepository>();
 builder.Services.AddTransient<ICanningSessionRepository, InMemoryCanningSessionRepository>();
 builder.Configuration.AddJsonFile("PearTypes.json", optional:false, reloadOnChange: true);
 builder.Services.Configure<PearmageddonConfig>(builder.Configuration.GetSection("PearmageddonConfig"));

@@ -12,8 +12,11 @@ namespace Pearmageddon.Controllers
     public class PearTypeController : Controller
     {
         private readonly IPearTypeRepository _PearTypeRepo;
-        public PearTypeController(IPearTypeRepository pearTypeRepo) 
+        private readonly IConfiguration _Config;
+        public PearTypeController(IConfiguration config, IPearTypeRepository pearTypeRepo) 
         { 
+            _Config = config;
+            
             _PearTypeRepo = pearTypeRepo;
         }
         [HttpGet]
