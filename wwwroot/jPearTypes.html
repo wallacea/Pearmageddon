@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1>Pear Types with jQuery</h1>
+    <div id="PearTypeList">
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        $(function () {
+            $.getJSON('/api/peartypes', function (pearTypes) {
+                pearTypes.forEach(pear => {
+                    $("#PearTypeList").append(`<div class="row"><div class="col-3">ID: ${pear.id}</div><div class="col-3">Name: ${pear.name}</div><div class="col-3">Color: ${pear.color}</div><div class="col-3">Timestamp: ${pear.timestamp}</div>`);
+                    //console.log(`ID: ${pear.id}, Name: ${pear.name}, Color: ${pear.color}, Timestamp: ${pear.timestamp}`);
+                });
+            })
+        });
+    </script>
+</body>
+</html>

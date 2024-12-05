@@ -1,0 +1,10 @@
+﻿@model FruitModel
+
+
+<div>
+    @Model.Name
+    <input type="hidden" asp-for="ID" />
+    <label asp-for="Variety"></label>
+    <input asp-for="Variety" />
+    <span class="text-danger" asp-validation-for="Variety"></span>
+</div>

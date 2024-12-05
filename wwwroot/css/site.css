@@ -21,8 +21,12 @@ body {
     margin-bottom: 60px;
 }
 
-div.pearTypes .row:nth-child(even) {
-    border-top: solid 1px #999;
-    border-bottom: solid 1px #999;
-    background-color: #f2f2f2;
+div.pearTypes .row {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    
 }
+    div.pearTypes .row:nth-child(even) {
+        border-bottom: solid 1px #999;
+        background-color: #f2f2f2;
+    }

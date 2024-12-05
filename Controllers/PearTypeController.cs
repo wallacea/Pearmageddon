@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pearmageddon.ExtensionMethods;
 using Pearmageddon.Models;
 using Pearmageddon.Objects;
@@ -7,6 +8,7 @@ using Pearmageddon.Repositories;
 namespace Pearmageddon.Controllers
 {
     [Route("PearType")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class PearTypeController : Controller
     {
         private readonly IPearTypeRepository _PearTypeRepo;
@@ -22,11 +24,15 @@ namespace Pearmageddon.Controllers
             return View(pearTypes);
         }
         [HttpGet("New")]
+        [Authorize]
+
         public IActionResult New()
         {
             return View();
         }
         [HttpPost("New")]
+        [Authorize]
+
         [ValidateAntiForgeryToken]
         public IActionResult New(PearTypeModel model)
         { 
@@ -40,12 +46,15 @@ namespace Pearmageddon.Controllers
         }
 
         [HttpGet("Edit/{id}")]
+        [Authorize]
+
         public IActionResult Edit(int id)
         {
             PearType pearType = _PearTypeRepo.Get(id);
-            return View(pearType);
+            return View(pearType?.ToModel());
         }
         [HttpPost("Edit/{ID}")]
+
         public IActionResult Edit(PearTypeModel model)
         {
             if (!ModelState.IsValid)

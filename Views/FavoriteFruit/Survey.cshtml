@@ -1,0 +1,17 @@
+﻿@model List<FruitModel>
+
+<form asp-action="Survey" asp-controller="FavoriteFruit">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        @if(Model[i] is AppleModel)
+        {
+            <partial name="_AppleFruit" for="@Model[i]" />
+        }
+        else
+        {
+            <partial name="_Fruit" for="@Model[i]" />
+        }
+
+    }
+    <button type="submit">Submit Survey</button>
+</form>

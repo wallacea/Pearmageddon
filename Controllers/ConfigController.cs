@@ -7,6 +7,8 @@ namespace Pearmageddon.Controllers
 {
     [Route("[controller]")]
     [Authorize(Roles = "Admins")]
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class ConfigController(IConfiguration config, IOptionsSnapshot<PearmageddonConfig> pearTypeOptions, RoleManager<IdentityRole> roleManager) : Controller
     {
         

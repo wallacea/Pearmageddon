@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1>Pear Types with Fetch API</h1>
+    <div id="PearTypeList" class="container-fluid">
+
+    </div>
+    <script>
+        async function fetchPearTypes() {
+            try {
+                const response = await fetch('/api/peartypes');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const pearTypes = await response.json();
+                outputPearTypes(pearTypes);
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        }
+
+        // Function to output the list of pear types
+        function outputPearTypes(pearTypes) {
+            pearTypes.forEach(pear => {
+                document.getElementById('PearTypeList').innerHTML += `<div class="row"><div class="col-3">ID: ${pear.id}</div><div class="col-3">Name: ${pear.name}</div><div class="col-3">Color: ${pear.color}</div><div class="col-3">Timestamp: ${pear.timestamp}</div>`;
+
+                //console.log(`ID: ${pear.id}, Name: ${pear.name}, Color: ${pear.color}, Timestamp: ${pear.timestamp}`);
+            });
+        }
+
+        // Call the function to fetch and output pear types
+        fetchPearTypes();
+    </script>
+</body>
+</html>

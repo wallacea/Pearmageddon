@@ -7,6 +7,8 @@ using Pearmageddon.Models;
 namespace Pearmageddon.Controllers;
 [Route("")]
 [Route("Home")]
+[ApiExplorerSettings(IgnoreApi = true)]
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -29,12 +31,14 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet("Privacy")]
     public IActionResult Privacy()
     {
         return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [HttpGet("Error")]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -16,8 +16,13 @@ builder.Services.AddTransient<IPearTypeRepository, DBPearTypeRepository>();
 builder.Services.AddTransient<ICanningSessionRepository, InMemoryCanningSessionRepository>();
 builder.Configuration.AddJsonFile("PearTypes.json", optional:false, reloadOnChange: true);
 builder.Services.Configure<PearmageddonConfig>(builder.Configuration.GetSection("PearmageddonConfig"));
+
+//Add Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddXmlDataContractSerializerFormatters();
 
 var app = builder.Build();
 
@@ -32,6 +37,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseRouting();
 app.UseResponseCaching();
 app.UseOutputCache();

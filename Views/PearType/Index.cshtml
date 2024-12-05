@@ -10,11 +10,15 @@
     <div class="pearTypes">
     @foreach(var pear in Model)
     {
-        <div class="row">
-            <h2>@pear.Name</h2>
-            <div>Color: @pear.Color</div>
-                <div><a asp-action="Edit" asp-controller="PearType" asp-route-id="@pear.ID" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i> Edit Pear Type</a></div>
-        </div>
+        <partial name="_PearType" for="@pear" />
+        
     }
     </div>
 </div>
+
+@section Scripts{
+<title>stuff</title>
+}
+@section Head{
+    <title>Other Stuff</title>
+}

@@ -9,10 +9,13 @@ namespace Pearmageddon.Controllers
 {
     [Route("CanningSession")]
     [Authorize]
+    [ApiExplorerSettings(IgnoreApi = true)]
+
     public class CanningSessionController(ICanningSessionRepository canningSessionRepo, IPearTypeRepository pearTypeRepo) : Controller
     {
         [Route("")]
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
         {
             IEnumerable<CanningSession> canningSessions = canningSessionRepo.GetAll();
