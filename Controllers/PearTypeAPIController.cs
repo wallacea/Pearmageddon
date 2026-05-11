@@ -50,6 +50,10 @@ namespace Pearmageddon.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(id == 0)
+                {
+                    return BadRequest();
+                
                 _PearTypeRepository.Save(pearType);
                 return Ok();
             }
