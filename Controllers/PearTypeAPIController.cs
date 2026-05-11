@@ -56,11 +56,11 @@ namespace Pearmageddon.Controllers
             return BadRequest();
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _PearTypeRepository.Delete(id);
-        //    return Ok();
-        //}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+           _PearTypeRepository.Delete(id);
+           return Ok();
+        }
     }
 }

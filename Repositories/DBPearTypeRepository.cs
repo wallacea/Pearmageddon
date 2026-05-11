@@ -54,5 +54,14 @@ namespace Pearmageddon.Repositories
             command.ExecuteNonQuery();
             cache.Remove("PearTypes");
         }
+        public void Delete(int id)
+        {
+            using SqlConnection connection = new SqlConnection(config["ConnectionStrings:Pearmageddon"]);
+            using SqlCommand command = new SqlCommand("DELETE FROM PearType WHERE ID = @ID", connection);
+            command.Parameters.AddWithValue("@ID", id);
+            command.Connection.Open();
+            command.ExecuteNonQuery();
+            cache.Remove("PearTypes");
+        }
     }
 }

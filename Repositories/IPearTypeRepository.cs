@@ -7,5 +7,6 @@ namespace Pearmageddon.Repositories
         PearType Get(int id);
         IEnumerable<PearType> GetAll();
         void Save(PearType pearType);
+        void Delete(int id);
     }
 }
